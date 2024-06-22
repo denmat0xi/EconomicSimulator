@@ -6,13 +6,23 @@ using UnityEngine;
 public class GameControllerScript : MonoBehaviour
 {
 
+    private float _intervalInMinutes = 5f;
+    private int _points;
+    private float _timer;
+    private Task _currentTask;
+
     public void Start()
     {
-        Debug.Log("test");
+        _timer = _intervalInMinutes * 60f;
     }
     
     public void Update()
     {
-        Debug.Log("tick");
+        _timer -= Time.deltaTime;
+        if (_timer <= 0)
+        {
+            _currentTask.everyDay(10);
+            _timer = _intervalInMinutes * 60f;
+        }
     }
 }
